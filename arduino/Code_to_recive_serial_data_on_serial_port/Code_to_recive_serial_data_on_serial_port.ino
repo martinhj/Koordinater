@@ -17,12 +17,6 @@ int drumPins [] = {0,1};
 unsigned long drumLastHit [] = {0, 0, 0, 0};
 boolean drumBusy [] = {false, false, false, false};
 
-
-
-
-
-
-
 long time = 0;
  
 void setup() {
