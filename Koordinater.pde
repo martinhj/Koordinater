@@ -1,6 +1,12 @@
 import SimpleOpenNI.*;
 import processing.serial.*;
 
+// refakturere til å sjekke for hver rute. Hvis man sjekker x og y på hver sin
+// side av null børe det være mulig å sjekke om en av disse har noen z-verdi 
+// som ligger over gulvet, istedenfor å kalle metoden for hver gang det er noe
+// over gulvet. Altså: Gå gjennom arrayet og sjekk om z har noe over gulvet, 
+// avbryt etter første funn.
+
 SimpleOpenNI context;
 
 Serial myPort;  // Create object from Serial class
