@@ -14,10 +14,11 @@ boolean [] squareOnOff = {false,false,false,false};
 float wx, wy, wz;
 final int WHEIGHT = 480;
 final int WLENGTH = 640;
-  PVector r = new PVector(0,0,0);
+PVector r = new PVector(0,0,0);
 
 void setup()
 {
+  println(Serial.list());
   // Relatert serialporten:
   String portName = Serial.list()[6];
   myPort = new Serial(this, portName, 9600);
@@ -32,6 +33,7 @@ void setup()
   
   //context = new SimpleOpenNI(this,SimpleOpenNI.RUN_MODE_SINGLE_THREADED);
   context = new SimpleOpenNI(this);
+  context.mirror();
   if(context.enableRGB() == false)
   {
     println("Can't open the RGB-stream, maybe the camera is not connectd!");
@@ -91,7 +93,7 @@ void draw()
           // Kan denne kanskje flyttes ned til drawText.
           // Hva slags endringer blir det av det?
           drawSquare(r.x, r.y, r.z);
-          println(depthMap[index]);
+          //println(depthMap[index]);
         
          time = millis();
          
@@ -118,19 +120,19 @@ void stop() {
 void drawSquare(float x, float y, float z) {
   if ( r.x < 0 && r.y > 0) {
     drawSquare(0);
-    myPort.write(0);
+    myPort.write(1);
   }
   if (r.x > 0 && r.y > 0) {
     drawSquare(1);
-    myPort.write(0);
+    //myPort.write(1);
   }
   if (r.x > 0 && r.y < 0) {
     drawSquare(2);
-    myPort.write(0);
+    //myPort.write(2);
   }
   if (r.x < 0 && r.y < 0) {
     drawSquare(3);
-    myPort.write(0);
+    myPort.write(2);
   }
 }
 

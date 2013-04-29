@@ -70,7 +70,7 @@ void loop() {
 void hitDrum(int value) {
 	//if (value == 0) engage(0);
 	if (value == 1) engage(0);
-	if (value == 2) engage(0);
+	if (value == 2) engage(1);
 	if (value == 3) engage(0);
 }
 
