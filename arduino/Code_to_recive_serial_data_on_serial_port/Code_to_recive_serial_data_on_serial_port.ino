@@ -45,12 +45,15 @@ void loop() {
 void hitDrum(int value) {
 	if (value == 0) engage(0);
 	if (value == 1) engage(1);
+	// i og med at det kun er to tilkoblede motorer blir kun motor 0 og 1 satt
+	// igang.
 	if (value == 2) engage(0);
 	if (value == 3) engage(1);
 }
 void engage(int i) {
 	digitalWrite(ledPin, HIGH);
-	if (drumBusy[i] == false && millis() - drumLastHit[i] > DELAY_BETWEEN_HITS) {
+	if (drumBusy[i] == false 
+		&& millis() - drumLastHit[i] > DELAY_BETWEEN_HITS) {
 		drumBusy[i] = true;
 		drumLastHit[i] = millis();
 		servoWrite(i, 30);
@@ -65,7 +68,8 @@ void servoWrite(int servo, int position) {
 }
 void disengageAll() {
 	for (int i = 0; i < NUMBER_OF_SERVOS; i++) {
-		if (drumBusy[i] == true && millis() - drumLastHit[i] > TIME_TO_RESET_SERVO) {
+		if (drumBusy[i] == true 
+			&& millis() - drumLastHit[i] > TIME_TO_RESET_SERVO) {
 			drumBusy[i] = false;
 			disengage(i);
 			digitalWrite(ledPin, LOW);
