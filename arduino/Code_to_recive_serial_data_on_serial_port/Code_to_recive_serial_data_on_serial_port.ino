@@ -3,7 +3,7 @@
 // Wiring/Arduino code:
 // Read data from the serial and turn ON or OFF a light depending on the value
 
-Servo [] servos;
+Servo servos [2];
 Servo servo1;
 Servo servo2; 
 int val; // Data received from the serial port
@@ -30,7 +30,7 @@ void setup() {
 	pinMode(servoPin2, OUTPUT);
 	servos[0].attach(servoPin1);
 	servos[1].attach(servoPin2);
-	servos[0].write(-30);
+	//servos[0].write(-30);
 	//for (int i = 0; i < sizeof(ledPins); i++) {
 		//pinMode(ledPins[i], OUTPUT);
 		//digitalWrite(ledPins[i], LOW);
