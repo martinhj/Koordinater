@@ -1,6 +1,11 @@
 import SimpleOpenNI.*;
+import processing.serial.*;
 
 SimpleOpenNI context;
+
+Serial myPort;  // Create object from Serial class
+int val;        // Data received from the serial port
+
 
 PFont fontA;
 long time = 0;
@@ -13,8 +18,13 @@ final int WLENGTH = 640;
 
 void setup()
 {
+  // Relatert serialporten:
+  String portName = Serial.list()[6];
+  myPort = new Serial(this, portName, 9600);
+
   size(WLENGTH, WHEIGHT);
   frameRate(30);
+
   fill(255,255,100);
   fontA = loadFont("hn.vlw");
   //smooth();
@@ -99,6 +109,7 @@ void draw()
   }
   //drawText(wx, wy, wz);  
   frame.setTitle((int)frameRate + " fps");
+
 }
 void stop() {
   println("Hadet bra.");
@@ -107,15 +118,19 @@ void stop() {
 void drawSquare(float x, float y, float z) {
   if ( r.x < 0 && r.y > 0) {
     drawSquare(0);
+    myPort.write(0);
   }
   if (r.x > 0 && r.y > 0) {
     drawSquare(1);
+    myPort.write(0);
   }
   if (r.x > 0 && r.y < 0) {
     drawSquare(2);
+    myPort.write(0);
   }
   if (r.x < 0 && r.y < 0) {
     drawSquare(3);
+    myPort.write(0);
   }
 }
 
