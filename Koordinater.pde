@@ -1,12 +1,6 @@
 import SimpleOpenNI.*;
 import processing.serial.*;
 
-// refakturere til å sjekke for hver rute. Hvis man sjekker x og y på hver sin
-// side av null børe det være mulig å sjekke om en av disse har noen z-verdi 
-// som ligger over gulvet, istedenfor å kalle metoden for hver gang det er noe
-// over gulvet. Altså: Gå gjennom arrayet og sjekk om z har noe over gulvet, 
-// avbryt etter første funn.
-
 SimpleOpenNI context;
 
 Serial myPort;  // Create object from Serial class
@@ -98,10 +92,6 @@ void draw()
   }
   //drawText(wx, wy, wz);  
   frame.setTitle((int)frameRate + " fps");
-  println("0: " + squareOnOff[0]);
-  println("1: " + squareOnOff[1]);
-  println("2: " + squareOnOff[2]);
-  println("3: " + squareOnOff[3]);
   drawSquares();
 }
 void stop() {
@@ -122,24 +112,6 @@ void setSquare(float x, float y) {
     squareOnOff[3] = true;
   }
 }
-/*void drawSquare(float x, float y, float z) {
-  if ( r.x < 0 && r.y > 0) {
-    drawSquare(0);
-    myPort.write(1);
-  }
-  if (r.x > 0 && r.y > 0) {
-    drawSquare(1);
-    //myPort.write(1);
-  }
-  if (r.x > 0 && r.y < 0) {
-    drawSquare(2);
-    //myPort.write(2);
-  }
-  if (r.x < 0 && r.y < 0) {
-    drawSquare(3);
-    myPort.write(2);
-  }
-}*/
 
 void drawSquares() {
   if (squareOnOff[1]) {drawSquare(1);squareOnOff[1] = false;}
