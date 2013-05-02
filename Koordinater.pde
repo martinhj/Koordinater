@@ -107,13 +107,22 @@ void setSquare(float x, float y) {
 }
 
 void drawSquares() {
-  if (squareOnOff[1]) {drawSquare(1);squareOnOff[1] = false;}
-  if (squareOnOff[2]) {drawSquare(2);squareOnOff[2] = false;}
-  if (squareOnOff[0]) {drawSquare(0);squareOnOff[0] = false;}
-  if (squareOnOff[3]) {drawSquare(3);squareOnOff[3] = false;}
+  if (squareOnOff[0]) {
+    drawSquare(0);
+  }
+  if (squareOnOff[1]) {
+    drawSquare(1);
+  }
+  if (squareOnOff[2]) {
+    drawSquare(2);
+  }
+  if (squareOnOff[3]) {
+    drawSquare(3);
+  }
 }
 
 void drawSquare(int square) {
+  myPort.write(square);
   int x = 0, y = 0;
   if (square == 0 || square == 3) {
     x = 0;
@@ -130,6 +139,8 @@ void drawSquare(int square) {
   fill(0,204,255, 120);
   rect(x, y, WLENGTH / 2, WHEIGHT / 2);
   fill(255,155,100);
+  // reset square
+  squareOnOff[square] = false;
 }
 
 void drawText(float x, float y, float z) {
