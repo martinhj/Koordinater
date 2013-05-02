@@ -32,7 +32,6 @@ void setup()
   
   //context = new SimpleOpenNI(this,SimpleOpenNI.RUN_MODE_SINGLE_THREADED);
   context = new SimpleOpenNI(this);
-  context.mirror();
   if(context.enableRGB() == false)
   {
     println("Can't open the RGB-stream, maybe the camera is not connectd!");
@@ -87,8 +86,10 @@ void draw()
   frame.setTitle((int)frameRate + " fps");
   drawSquares();
 }
-void stop() {
+// slette serial-lock-fila her?
+void exit() {
   println("Hadet bra.");
+  super.exit();
 }
 
 void setSquare(float x, float y) {
