@@ -20,13 +20,12 @@ boolean [] squareOnOff = {false,false,false,false};
 float wx, wy, wz;
 final int WHEIGHT = 480;
 final int WLENGTH = 640;
-PVector r = new PVector(0,0,0);
 
 void setup()
 {
   println(Serial.list());
   // Relatert serialporten:
-  String portName = Serial.list()[6];
+  String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600);
 
   size(WLENGTH, WHEIGHT);
@@ -64,7 +63,7 @@ void draw()
   background(0,0,0);
   image(context.rgbImage(),0,0);
   drawGrid();
-  ellipse(WLENGTH/2, WHEIGHT/2, 50,50);
+  //ellipse(WLENGTH/2, WHEIGHT/2, 50,50);
 
   int[]   depthMap = context.depthMap();
   int     steps   = 3;  // to speed up the drawing, draw every third point
@@ -75,55 +74,55 @@ void draw()
 
   PVector[] realWorldMap = context.depthMapRealWorld();
   // lengden på realWorldMap er 640x480 (307200)
-
   for(int y=0;y < context.depthHeight();y+=steps)
   {
     for(int x=0;x < context.depthWidth();x+=steps)
     {
       index = x + y * context.depthWidth();
-      if(depthMap[index] > 0)
-      { 
+      //if(depthMap[index] > 0)
+      //{ 
 //      realWorldPoint = context.depthMapRealWorld()[index];
         realWorldPoint = realWorldMap[index];
-        r = realWorldPoint;
-      }
-      /*if (r.z > 1700 && r.z < 1800 && millis() - time > 10) {*/
-      // millis() - time > 10 with the time = millis() inside the if statement 
-      // makes it update only each hundered millisecond.
-      // The r.z < 2000 makes sure to ignore the floor and all things near the floor.
-      
-        
-      if (millis() - time > 5  ) {
-        if (r.z < 2600) {
-          wx = r.x; wy = r.y; wz = r.z;
+        if (realWorldPoint.z < 2600) {
+          //wx = r.x; wy = r.y; wz = r.z;
           // Kan denne kanskje flyttes ned til drawText.
           // Hva slags endringer blir det av det?
-          drawSquare(r.x, r.y, r.z);
+          setSquare(realWorldPoint.x, realWorldPoint.y);         
+          //drawSquare(r.x, r.y, r.z);
           //println(depthMap[index]);
-        
-         time = millis();
-         
-         wx = wy = wz = 0;
+         //wx = wy = wz = 0;
         }
-      }
-       // println("x:  " + r.x + " y: " + r.y + " z:  " + r.z);
       //}
-      //if (r.z > 2000 && r.z < 2600 && r.z != 0.0) {
-      //  println("x:  " + r.x + " y: " + r.y + " z:  " + r.z);
-      //}
-      
     }
 
   }
   //drawText(wx, wy, wz);  
   frame.setTitle((int)frameRate + " fps");
-
+  println("0: " + squareOnOff[0]);
+  println("1: " + squareOnOff[1]);
+  println("2: " + squareOnOff[2]);
+  println("3: " + squareOnOff[3]);
+  drawSquares();
 }
 void stop() {
   println("Hadet bra.");
 }
 
-void drawSquare(float x, float y, float z) {
+void setSquare(float x, float y) {
+  if (x < 0 && y > 0) {
+    squareOnOff[0] = true;
+  }
+  if (x > 0 && y > 0) {
+    squareOnOff[1] = true;
+  }
+  if (x > 0 && y < 0) {
+    squareOnOff[2] = true;
+  }
+  if (x < 0 && y < 0) {
+    squareOnOff[3] = true;
+  }
+}
+/*void drawSquare(float x, float y, float z) {
   if ( r.x < 0 && r.y > 0) {
     drawSquare(0);
     myPort.write(1);
@@ -140,6 +139,13 @@ void drawSquare(float x, float y, float z) {
     drawSquare(3);
     myPort.write(2);
   }
+}*/
+
+void drawSquares() {
+  if (squareOnOff[1]) {drawSquare(1);squareOnOff[1] = false;}
+  if (squareOnOff[2]) {drawSquare(2);squareOnOff[2] = false;}
+  if (squareOnOff[0]) {drawSquare(0);squareOnOff[0] = false;}
+  if (squareOnOff[3]) {drawSquare(3);squareOnOff[3] = false;}
 }
 
 void drawSquare(int square) {
