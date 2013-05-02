@@ -57,8 +57,7 @@ void draw()
   background(0,0,0);
   image(context.rgbImage(),0,0);
   drawGrid();
-  //ellipse(WLENGTH/2, WHEIGHT/2, 50,50);
-
+  
   int[]   depthMap = context.depthMap();
   int     steps   = 3;  // to speed up the drawing, draw every third point
   int     index;
@@ -73,20 +72,14 @@ void draw()
     for(int x=0;x < context.depthWidth();x+=steps)
     {
       index = x + y * context.depthWidth();
-      //if(depthMap[index] > 0)
-      //{ 
+      if(depthMap[index] > 0)
+      { 
 //      realWorldPoint = context.depthMapRealWorld()[index];
         realWorldPoint = realWorldMap[index];
         if (realWorldPoint.z < 2600) {
-          //wx = r.x; wy = r.y; wz = r.z;
-          // Kan denne kanskje flyttes ned til drawText.
-          // Hva slags endringer blir det av det?
-          setSquare(realWorldPoint.x, realWorldPoint.y);         
-          //drawSquare(r.x, r.y, r.z);
-          //println(depthMap[index]);
-         //wx = wy = wz = 0;
+          setSquare(realWorldPoint.x, realWorldPoint.y);
         }
-      //}
+      }
     }
 
   }
