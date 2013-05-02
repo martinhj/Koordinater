@@ -19,7 +19,7 @@ void setup()
 {
   println(Serial.list());
   // Relatert serialporten:
-  String portName = Serial.list()[0];
+  String portName = Serial.list()[6];
   myPort = new Serial(this, portName, 9600);
 
   size(WLENGTH, WHEIGHT);
