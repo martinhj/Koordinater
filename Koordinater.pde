@@ -74,8 +74,8 @@ void draw()
       if(depthMap[index] > 0)
       { 
 //      realWorldPoint = context.depthMapRealWorld()[index];
-        realWorldPoint = realWorldMap[index];
-        if (realWorldPoint.z < 2700 && realWorldPoint.z > 1300) {
+        realWorldPoint = depthMap[index];
+        if (realWorldPoint < 2700 && realWorldPoint > 1300) {
           setSquare(realWorldPoint.x, realWorldPoint.y);
         }
       }
