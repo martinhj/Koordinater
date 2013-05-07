@@ -95,16 +95,16 @@ void exit() {
 }
 
 void setSquare(float x, float y) {
-  if (x < width / 2 && y >= height / 2) {
+  if (x < width / 2 && y < height / 2) {
     squareOnOff[0] = true;
   }
-  if (x >= width / 2 && y >= height / 2) {
+  if (x >= width / 2 && y < height / 2) {
     squareOnOff[1] = true;
   }
-  if (x >= width && y < height / 2) {
+  if (x >= width / 2 && y >= height / 2) {
     squareOnOff[2] = true;
   }
-  if (x < width && y < height / 2) {
+  if (x < width / 2 && y >= height / 2) {
     squareOnOff[3] = true;
   }
 }
