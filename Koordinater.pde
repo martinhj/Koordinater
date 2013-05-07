@@ -19,7 +19,7 @@ void setup()
 {
   println(Serial.list());
   // Relatert serialporten:
-  String portName = Serial.list()[6];
+  String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600);
 
   size(WLENGTH, WHEIGHT);
@@ -60,19 +60,19 @@ void draw()
   int[]   depthMap = context.depthMap();
   int     steps   = 3;  // to speed up the drawing, draw every third point
   int     index;
-  PVector realWorldPoint;
+  int realWorldPoint;
   //flytte disse til setup hvis alt er greit.
   int height = context.depthHeight();
-  int width = context.depthLength();
+  int width = context.depthWidth();
   stroke(255);
 
   PVector[] realWorldMap = context.depthMapRealWorld();
   // lengden på realWorldMap er 640x480 (307200)
-  for(int y=0;y < height();y+=steps)
+  for(int y=0;y < height;y+=steps)
   {
-    for(int x=0;x < width();x+=steps)
+    for(int x=0;x < width;x+=steps)
     {
-      index = x + y * width();
+      index = x + y * width;
       if(depthMap[index] > 0)
       { 
 //      realWorldPoint = context.depthMapRealWorld()[index];
