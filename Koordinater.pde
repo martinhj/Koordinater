@@ -23,7 +23,7 @@ void setup()
   myPort = new Serial(this, portName, 9600);
 
   size(WLENGTH, WHEIGHT);
-  frameRate(30);
+  frameRate(60);
 
   fill(255,255,100);
   fontA = loadFont("hn.vlw");
@@ -56,7 +56,7 @@ void draw()
   background(0,0,0);
   image(context.rgbImage(),0,0);
   drawGrid();
-  
+  // flytte deklareringen av disse til setup?
   int[]   depthMap = context.depthMap();
   int     steps   = 3;  // to speed up the drawing, draw every third point
   int     index;
@@ -66,7 +66,7 @@ void draw()
   int width = context.depthWidth();
   stroke(255);
 
-  PVector[] realWorldMap = context.depthMapRealWorld();
+ 
   // lengden på realWorldMap er 640x480 (307200)
   for(int y=0;y < height;y+=steps)
   {
