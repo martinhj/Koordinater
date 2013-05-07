@@ -61,22 +61,24 @@ void draw()
   int     steps   = 3;  // to speed up the drawing, draw every third point
   int     index;
   PVector realWorldPoint;
-
+  //flytte disse til setup hvis alt er greit.
+  int height = context.depthHeight();
+  int width = context.depthLength();
   stroke(255);
 
   PVector[] realWorldMap = context.depthMapRealWorld();
   // lengden på realWorldMap er 640x480 (307200)
-  for(int y=0;y < context.depthHeight();y+=steps)
+  for(int y=0;y < height();y+=steps)
   {
-    for(int x=0;x < context.depthWidth();x+=steps)
+    for(int x=0;x < width();x+=steps)
     {
-      index = x + y * context.depthWidth();
+      index = x + y * width();
       if(depthMap[index] > 0)
       { 
 //      realWorldPoint = context.depthMapRealWorld()[index];
         realWorldPoint = depthMap[index];
         if (realWorldPoint < 2700 && realWorldPoint > 1300) {
-          setSquare(realWorldPoint.x, realWorldPoint.y);
+          setSquare(x, y);
         }
       }
     }
@@ -93,16 +95,16 @@ void exit() {
 }
 
 void setSquare(float x, float y) {
-  if (x < 0 && y > 0) {
+  if (x < width / 2 && y >= height / 2) {
     squareOnOff[0] = true;
   }
-  if (x > 0 && y > 0) {
+  if (x >= width / 2 && y >= height / 2) {
     squareOnOff[1] = true;
   }
-  if (x > 0 && y < 0) {
+  if (x >= width && y < height / 2) {
     squareOnOff[2] = true;
   }
-  if (x < 0 && y < 0) {
+  if (x < width && y < height / 2) {
     squareOnOff[3] = true;
   }
 }
