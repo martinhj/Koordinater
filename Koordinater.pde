@@ -66,7 +66,7 @@ void draw()
   int width = context.depthWidth();
   stroke(255);
 
- 
+  // PVector[] realWorldMap = context.depthMapRealWorld();
   // lengden på realWorldMap er 640x480 (307200)
   for(int y=0;y < height;y+=steps)
   {
