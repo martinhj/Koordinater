@@ -11,7 +11,7 @@ PFont fontA;
 long time = 0;
 long [] squareTime = {0,0,0,0};
 boolean [] squareOnOff = {false,false,false,false};
-float wx, wy, wz;
+int barrier;
 final int WHEIGHT = 480;
 final int WLENGTH = 640;
 
@@ -22,13 +22,16 @@ void setup()
   String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600);
 
+  //spacing between zones
+  barrier = 0;
+
   size(WLENGTH, WHEIGHT);
   frameRate(60);
 
   fill(255,255,100);
   fontA = loadFont("hn.vlw");
   //smooth();
-  textFont(fontA, 32); 
+  textFont(fontA, 32);
   
   //context = new SimpleOpenNI(this,SimpleOpenNI.RUN_MODE_SINGLE_THREADED);
   context = new SimpleOpenNI(this);
@@ -95,16 +98,16 @@ void exit() {
 }
 
 void setSquare(float x, float y) {
-  if (x < width / 2 && y < height / 2) {
+  if (x < width  / 2 - barrier && y < height / 2 - barrier) {
     squareOnOff[0] = true;
   }
-  if (x >= width / 2 && y < height / 2) {
+  if (x >= width / 2 + barrier && y < height / 2 - barrier) {
     squareOnOff[1] = true;
   }
-  if (x >= width / 2 && y >= height / 2) {
+  if (x >= width / 2 + barrier && y >= height / 2 + barrier) {
     squareOnOff[2] = true;
   }
-  if (x < width / 2 && y >= height / 2) {
+  if (x < width / 2 - barrier && y >= height / 2 + barrier) {
     squareOnOff[3] = true;
   }
 }
