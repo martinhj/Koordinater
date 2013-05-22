@@ -20,7 +20,6 @@ const int DELAY_BETWEEN_HITS = 400;
 
 
 int ledPin = 13;
-int drumPins [] = {0,1};
 unsigned long drumLastHit [] = {0, 0, 0, 0};
 boolean drumBusy [] = {false, false, false, false};
 
