@@ -10,10 +10,10 @@ Servo servo4;
  
 int val;
 
-const int servoPin1 = 3;
-const int servoPin2 = 5;
+const int servoPin1 = 7;
+const int servoPin2 = 8;
 const int servoPin3 = 9;
-const int servoPin4 = 8;
+const int servoPin4 = 10;
 const int NUMBER_OF_SERVOS = 4;
 const int TIME_TO_RESET_SERVO = 100;
 const int DELAY_BETWEEN_HITS = 400;
